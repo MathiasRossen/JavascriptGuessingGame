@@ -1,0 +1,67 @@
+<head>
+    <title>Guessing Game</title>
+    <meta charset="UTF-8">
+    <script>
+        let targetNumber = Math.floor(Math.random() * 10) + 1;
+        var lives = 5;
+
+        function init() {
+            window.onload = function () {
+                document.getElementById("guessButton").addEventListener("click", function () {
+                    check(document.getElementById("guess").value);
+                });
+            }
+        }
+
+        function loseLife() {
+            lives--;
+            document.getElementById("lives").innerHTML = lives;
+        }
+
+        function check(value) {
+            if (lives > 0) {
+                if(value == 1){
+                    alert("EEET!");
+                }
+                if(value == targetNumber){
+                    showWin();
+                }
+                else if(value < targetNumber){
+                    loseLife();
+                    document.getElementById("output").innerHTML = "You must go higher";
+                }
+                else if (value > targetNumber){
+                    loseLife();
+                    document.getElementById("output").innerHTML = "You must go lower";
+                }
+            }
+            else{
+                showLoss();
+            }
+        }
+
+        function showWin() {
+            document.getElementById("output").innerHTML = "You win.";
+        }
+
+        function showError() {
+            alert("DONT FUCKING RUIN MY INPUT FIELD YOU MOTHERFUCKER");
+        }
+
+        function showLoss() {
+            document.getElementById("output").innerHTML = "You lose.";
+        }
+
+        init();
+    </script>
+</head>
+
+<body style="font-family:Arial, Helvetica, sans-serif">
+    <p>Guess a number between 1 and 10</p>
+    <p id="lives">5</p>
+    <form>
+        <input type="text" name="number" id="guess">
+        <input type="button" name="guessButton" id="guessButton" value="GÆT!" />
+    </form>
+    <p id="output"></p>
+</body>
